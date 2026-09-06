@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Room Booking</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f5f5;
+}
+
+header{
+background:#0d6efd;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+nav{
+background:#222;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+nav a{
+color:white;
+padding:15px 20px;
+text-decoration:none;
+}
+
+nav a:hover{
+background:#0d6efd;
+}
+
+.hero{
+background:url("https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200") center/cover;
+height:350px;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+font-size:40px;
+font-weight:bold;
+text-shadow:2px 2px 5px black;
+}
+
+.container{
+width:90%;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+margin:20px 0;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.2);
+}
+
+h2{
+margin-bottom:15px;
+color:#0d6efd;
+}
+
+input,select,textarea{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+button{
+background:#0d6efd;
+color:white;
+padding:12px 20px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#084298;
+}
+
+.rooms{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.room{
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 0 10px rgba(0,0,0,.2);
+}
+
+.room img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.room h3,p{
+padding:10px;
+}
+
+footer{
+background:#222;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:30px;
+}
+
+@media(max-width:768px){
+.hero{
+font-size:28px;
+height:220px;
+}
+}
+</style>
+
+</head>
+<body>
+
+<header>
+<h1>Luxury Hotel Booking System</h1>
+<p>Book Your Dream Stay</p>
+</header>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#search">Search</a>
+<a href="#rooms">Rooms</a>
+<a href="#booking">Booking</a>
+<a href="#profile">Profile</a>
+<a href="#history">History</a>
+<a href="#admin">Admin</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<section class="hero" id="home">
+Welcome to Paradise Hotel
+</section>
+
+<div class="container">
+
+<div class="card" id="search">
+<h2>Search Available Rooms</h2>
+
+<input type="text" placeholder="Destination">
+
+<label>Check In</label>
+<input type="date">
+
+<label>Check Out</label>
+<input type="date">
+
+<select>
+<option>1 Guest</option>
+<option>2 Guests</option>
+<option>3 Guests</option>
+<option>4 Guests</option>
+</select>
+
+<button onclick="searchRoom()">Check Availability</button>
+
+<p id="searchResult"></p>
+
+</div>
+
+<div class="card" id="rooms">
+
+<h2>Room Types</h2>
+
+<div class="rooms">
+
+<div class="room">
+<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600">
+<h3>Single Room</h3>
+<p>$50 / Night</p>
+</div>
+
+<div class="room">
+<img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=601">
+<h3>Double Room</h3>
+<p>$90 / Night</p>
+</div>
+
+<div class="room">
+<img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=600">
+<h3>Deluxe Room</h3>
+<p>$150 / Night</p>
+</div>
+
+<div class="room">
+<img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=600">
+<h3>Suite Room</h3>
+<p>$250 / Night</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="card" id="booking">
+
+<h2>Book Your Room</h2>
+
+<input type="text" placeholder="Full Name">
+
+<input type="email" placeholder="Email">
+
+<select>
+<option>Single Room</option>
+<option>Double Room</option>
+<option>Deluxe Room</option>
+<option>Suite Room</option>
+</select>
+
+<label>Arrival Date</label>
+<input type="date">
+
+<label>Departure Date</label>
+<input type="date">
+
+<button onclick="bookRoom()">Book Now</button>
+
+<p id="bookingMsg"></p>
+
+</div>
+
+<div class="card" id="profile">
+
+<h2>User Profile</h2>
+
+<p><b>Name:</b> John Smith</p>
+
+<p><b>Email:</b> john@email.com</p>
+
+<button>Edit Profile</button>
+
+</div>
+
+<div class="card" id="history">
+
+<h2>Booking History</h2>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+<th>Booking ID</th>
+<th>Room</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+<tr>
+<td>101</td>
+<td>Deluxe</td>
+<td>Confirmed</td>
+<td>
+<button>Edit</button>
+<button>Cancel</button>
+</td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="card" id="admin">
+
+<h2>Administrator Panel</h2>
+
+<h3>Manage Rooms</h3>
+
+<select>
+<option>Single</option>
+<option>Double</option>
+<option>Deluxe</option>
+<option>Suite</option>
+</select>
+
+<input type="number" placeholder="Room Quantity">
+
+<input type="number" placeholder="Price">
+
+<button>Update Room</button>
+
+<hr><br>
+
+<h3>Manage Booking</h3>
+
+<input type="text" placeholder="Booking ID">
+
+<button>Modify Booking</button>
+
+<button>Cancel Booking</button>
+
+<hr><br>
+
+<h3>Manage Website Pages</h3>
+
+<textarea rows="5" placeholder="Update About Us, Contact, FAQ, Privacy Policy"></textarea>
+
+<button>Save Changes</button>
+
+</div>
+
+<div class="card">
+
+<h2>About Us</h2>
+
+<p>
+Paradise Hotel provides luxury accommodation with affordable prices,
+excellent customer service and secure online booking.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Customer Service Q&A</h2>
+
+<p><b>Q:</b> Can I cancel my booking?</p>
+
+<p><b>A:</b> Yes, up to 3 days before arrival.</p>
+
+<p><b>Q:</b> Can I modify my booking?</p>
+
+<p><b>A:</b> Yes, before 3 days of arrival.</p>
+
+</div>
+
+<div class="card">
+
+<h2>Privacy Policy</h2>
+
+<p>
+All user information and payments are securely encrypted.
+</p>
+
+</div>
+
+<div class="card" id="contact">
+
+<h2>Contact Us</h2>
+
+<p>Email : support@hotel.com</p>
+
+<p>Phone : +1 123 456 7890</p>
+
+<p>Address : New York, USA</p>
+
+</div>
+
+</div>
+
+<footer>
+
+<p>© 2025 Paradise Hotel Booking System</p>
+
+</footer>
+
+<script>
+
+function searchRoom(){
+
+document.getElementById("searchResult").innerHTML=
+"Rooms are available for your selected dates.";
+
+}
+
+function bookRoom(){
+
+document.getElementById("bookingMsg").innerHTML=
+"Booking Successful! Confirmation email has been sent.";
+
+}
+
+</script>
+
+</body>
+</html>
